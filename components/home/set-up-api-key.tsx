@@ -17,7 +17,8 @@ import { apiKeyAtom } from "@/lib/atoms/api-key";
 import { toast } from "sonner";
 
 type ApiKeyInput = {
-  apiKey: string;
+  key: string;
+  secret: string;
 };
 
 export default function SetUpApiKey() {
@@ -32,7 +33,8 @@ export default function SetUpApiKey() {
   } = useForm<ApiKeyInput>();
   const onSubmit: SubmitHandler<ApiKeyInput> = (data) => {
     setApiKey({
-      apiKey: data.apiKey,
+      key: data.key,
+      secret: data.secret,
     });
     handleOpenChange(false);
     toast.success("Successfully set API key!");
@@ -42,7 +44,8 @@ export default function SetUpApiKey() {
     setIsDialogOpen(isOpen);
     if (isOpen) {
       reset({
-        apiKey: apiKey?.apiKey || "",
+        key: apiKey?.key || "",
+        secret: apiKey?.secret || "",
       });
     }
   };
@@ -64,15 +67,29 @@ export default function SetUpApiKey() {
             htmlFor=""
             className="text-xs uppercase tracking-wider font-medium text-slate-500"
           >
-            API key <span className="text-red-500">*</span>
+            Key <span className="text-red-500">*</span>
           </label>
           <Input
-            placeholder="Paste/write your API key here ..."
-            {...register("apiKey", { required: true })}
+            placeholder="Example: 3mM44UdBeqoP6f_AyuZxePx3u2RCHVLN8e8bd"
+            {...register("key", { required: true })}
             className="mt-2"
           />
-          {errors.apiKey && (
-            <p className="text-red-500 text-xs mt-2">API key must be filled!</p>
+          {errors.key && (
+            <p className="text-red-500 text-xs mt-2">Key must be filled!</p>
+          )}
+          <label
+            htmlFor=""
+            className="text-xs uppercase tracking-wider font-medium text-slate-500 mt-4 inline-block"
+          >
+            Secret <span className="text-red-500">*</span>
+          </label>
+          <Input
+            placeholder="Example: Ln7Wn7wvicPzAQiuGxVa8Q"
+            {...register("secret", { required: true })}
+            className="mt-2"
+          />
+          {errors.secret && (
+            <p className="text-red-500 text-xs mt-2">Secret must be filled!</p>
           )}
           <Button type="submit" className="mt-8">
             Set API key
