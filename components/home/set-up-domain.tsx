@@ -11,9 +11,24 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 export default function SetUpDomain() {
   const apiKey = useAtomValue(apiKeyAtom);
+
+  const query = useQuery({
+    queryKey: ["domains", apiKey],
+    queryFn: async () => {
+      const { data } = await axios.get("/api/domains", {
+        headers: {
+          Authorization: `sso-key ${apiKey?.key}:${apiKey?.secret}`,
+        },
+      });
+      return data;
+    },
+    enabled: apiKey !== null,
+  });
 
   return (
     <Dialog>
