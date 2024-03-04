@@ -40,7 +40,11 @@ export default function SetUpApiKey() {
 
   const handleOpenChange = (isOpen: boolean) => {
     setIsDialogOpen(isOpen);
-    reset();
+    if (isOpen) {
+      reset({
+        apiKey: apiKey?.apiKey || "",
+      });
+    }
   };
 
   return (
