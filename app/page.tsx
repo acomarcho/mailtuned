@@ -1,4 +1,5 @@
 import SetUpApiKey from "@/components/home/set-up-api-key";
+import SetUpDomain from "@/components/home/set-up-domain";
 import { Button } from "@/components/ui/button";
 
 export default function Page() {
@@ -10,7 +11,10 @@ export default function Page() {
             Mailtuned
           </h1>
           <h2 className="text-slate-500">GoDaddy DNS Toolkit</h2>
-          <SetUpApiKey />
+          <div className="flex gap-4">
+            <SetUpApiKey />
+            <SetUpDomain />
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-4">
           <Button className="bg-slate-900 text-slate-200 w-full uppercase font-bold tracking-widest hover:bg-slate-600">
