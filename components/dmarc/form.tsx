@@ -4,6 +4,13 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useForm } from "react-hook-form";
+import { apiKeyAtom } from "@/lib/atoms/api-key";
+import { domainAtom } from "@/lib/atoms/domain";
+import { PageStatus } from "@/lib/constants/page-status";
+import { useAtomValue } from "jotai";
+import { useState } from "react";
+import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
 
 enum Setup {
   SoftSetup = "soft-setup",
@@ -21,7 +28,77 @@ type DmarcInput = {
 };
 
 export default function DmarcForm() {
-  const form = useForm<DmarcInput>();
+  const [pageStatus, setPageStatus] = useState<PageStatus>(PageStatus.None);
+
+  const apiKey = useAtomValue(apiKeyAtom);
+  const domain = useAtomValue(domainAtom);
+
+  const form = useForm<DmarcInput>({
+    defaultValues: {
+      setup: Setup.SoftSetup,
+      reporting: Reporting.ReportingYes,
+    },
+  });
+
+  const handleUpdateDkimRecord = async () => {
+    if (!domain) {
+      return;
+    }
+
+    setPageStatus(PageStatus.Loading);
+    for (const domainName of domain.domains) {
+      try {
+        let data: string;
+        const setup = form.watch("setup");
+        const reporting = form.watch("reporting");
+        const email = "example@example.com"; // TODO
+
+        if (setup === Setup.SoftSetup && reporting === Reporting.ReportingYes) {
+          data = `v=DMARC1;p=reject;sp=reject;pct=100;rua=mailto:${email};ri=86400;aspf=r;adkim=r;fo=1;`;
+        } else if (
+          setup === Setup.HardSetup &&
+          reporting === Reporting.ReportingYes
+        ) {
+          data = `v=DMARC1;p=reject;sp=reject;pct=100;rua=mailto:${email};ri=86400;aspf=s;adkim=s;fo=1;`;
+        } else if (
+          setup === Setup.SoftSetup &&
+          reporting === Reporting.ReportingNo
+        ) {
+          data =
+            "v=DMARC1; p=reject; sp=reject; pct=0; ri=86400; aspf=r; adkim=r;";
+        } else {
+          data =
+            "v=DMARC1; p=reject; sp=reject; pct=100; ri=86400; aspf=s; adkim=s;";
+        }
+
+        await axios.post(
+          "/api/dmarc",
+          {
+            domain: domainName,
+            data: data,
+          },
+          {
+            headers: {
+              Authorization: `sso-key ${apiKey?.key}:${apiKey?.secret}`,
+            },
+          }
+        );
+        toast.success(`[${domainName}] Successfully updated DMARC record!`);
+      } catch (error) {
+        const defaultErrorText = `[${domainName}] An error occured while updating DMARC record`;
+        if (error instanceof AxiosError) {
+          toast.error(
+            error.response?.data.message
+              ? `[${domainName}] ${error.response.data.message}`
+              : defaultErrorText
+          );
+        } else {
+          toast.error(defaultErrorText);
+        }
+      }
+    }
+    setPageStatus(PageStatus.None);
+  };
 
   return (
     <>
@@ -127,8 +204,13 @@ export default function DmarcForm() {
           </div>
         </RadioGroup>
       </div>
-      <Button type="submit" className="mt-12">
-        Submit DMARC record!
+      <Button
+        type="submit"
+        className="mt-12"
+        onClick={() => handleUpdateDkimRecord()}
+        disabled={pageStatus === PageStatus.Loading}
+      >
+        Submit DMARC record! {pageStatus === PageStatus.Loading && "..."}
       </Button>
     </>
   );

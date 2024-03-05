@@ -56,7 +56,7 @@ export default function DkimForm() {
         );
         toast.success(`[${domainName}] Successfully updated DKIM record!`);
       } catch (error) {
-        const defaultErrorText = `[${domainName}] An error occured while updating DKIM records`;
+        const defaultErrorText = `[${domainName}] An error occured while updating DKIM record`;
         if (error instanceof AxiosError) {
           toast.error(
             error.response?.data.message
