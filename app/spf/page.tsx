@@ -10,7 +10,7 @@ export default function SpfPage() {
         Select your email provider. Your email provider is what platform you
         send emails from!
       </p>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
         <SpfButtons />
       </div>
     </div>
