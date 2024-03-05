@@ -4,11 +4,13 @@ import { useAtomValue } from "jotai";
 import { Button } from "../ui/button";
 import { domainAtom } from "@/lib/atoms/domain";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function NavigationButtons() {
   const domain = useAtomValue(domainAtom);
-
   const isDomainSelected = domain !== undefined;
+
+  const router = useRouter();
 
   return (
     <>
@@ -33,6 +35,7 @@ export default function NavigationButtons() {
               "Please finish your set up (API key and domain) before continuing!"
             );
           }
+          router.push("/spf");
         }}
       >
         (1) Add SPF
