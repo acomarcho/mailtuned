@@ -1,7 +1,7 @@
 "use client";
 
 import { apiKeyAtom } from "@/lib/atoms/api-key";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useAtom } from "jotai";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,9 +22,35 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { domainAtom } from "@/lib/atoms/domain";
+
+type DomainInput = {
+  domain: string;
+};
 
 export default function SetUpDomain() {
   const apiKey = useAtomValue(apiKeyAtom);
+  const [domain, setDomain] = useAtom(domainAtom);
+
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const { setValue, handleSubmit, reset, watch } = useForm<DomainInput>();
+  const onSubmit: SubmitHandler<DomainInput> = (data) => {
+    setDomain(data.domain);
+    handleOpenChange(false);
+    toast.success("Successfully set domain!");
+  };
+
+  const handleOpenChange = (isOpen: boolean) => {
+    setIsDialogOpen(isOpen);
+    if (isOpen) {
+      reset({
+        domain: domain ?? undefined,
+      });
+    }
+  };
 
   const query = useQuery({
     queryKey: ["domains", apiKey],
@@ -35,7 +61,9 @@ export default function SetUpDomain() {
             Authorization: `sso-key ${apiKey?.key}:${apiKey?.secret}`,
           },
         });
-        toast.success("Successfuly fetched your domains!");
+        if (domain === undefined) {
+          toast.success("Successfuly fetched your domains!");
+        }
         return data.data;
       } catch (error) {
         toast.error(
@@ -48,7 +76,7 @@ export default function SetUpDomain() {
   });
 
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button
           className="mt-8 w-fit"
@@ -64,14 +92,17 @@ export default function SetUpDomain() {
             Choose one of your domains that you want to use!
           </DialogDescription>
         </DialogHeader>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <label
             htmlFor=""
             className="text-xs uppercase tracking-wider font-medium text-slate-500 block"
           >
             Domain <span className="text-red-500">*</span>
           </label>
-          <Select>
+          <Select
+            value={domain}
+            onValueChange={(value) => setValue("domain", value)}
+          >
             <SelectTrigger className="w-full mt-4">
               <SelectValue placeholder="Select a domain ..." />
             </SelectTrigger>
@@ -85,8 +116,17 @@ export default function SetUpDomain() {
               })}
             </SelectContent>
           </Select>
-          <Button type="submit" className="block mt-8">
-            Set API key
+          {!watch("domain") && (
+            <p className="text-red-500 text-xs mt-2">
+              You must choose a domain!
+            </p>
+          )}
+          <Button
+            type="submit"
+            className="block mt-8"
+            disabled={!watch("domain")}
+          >
+            Set domain
           </Button>
         </form>
       </DialogContent>

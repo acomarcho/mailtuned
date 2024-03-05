@@ -25,6 +25,7 @@ export default function SetUpApiKey() {
   const [apiKey, setApiKey] = useAtom(apiKeyAtom);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
   const {
     register,
     handleSubmit,
