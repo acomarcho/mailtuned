@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useAtom } from "jotai";
 import { apiKeyAtom } from "@/lib/atoms/api-key";
 import { toast } from "sonner";
+import { domainAtom } from "@/lib/atoms/domain";
 
 type ApiKeyInput = {
   key: string;
@@ -23,9 +24,10 @@ type ApiKeyInput = {
 
 export default function SetUpApiKey() {
   const [apiKey, setApiKey] = useAtom(apiKeyAtom);
+  const [domain, setDomain] = useAtom(domainAtom);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  
+
   const {
     register,
     handleSubmit,
@@ -38,7 +40,12 @@ export default function SetUpApiKey() {
       secret: data.secret,
     });
     handleOpenChange(false);
-    toast.success("Successfully set API key!");
+    toast.success(
+      "Successfully set API key! Your domain information has been reset."
+    );
+    if (domain) {
+      setDomain(undefined);
+    }
   };
 
   const handleOpenChange = (isOpen: boolean) => {
@@ -92,7 +99,11 @@ export default function SetUpApiKey() {
           {errors.secret && (
             <p className="text-red-500 text-xs mt-2">Secret must be filled!</p>
           )}
-          <Button type="submit" className="mt-8">
+          <p className="text-yellow-700 text-xs mt-6">
+            Changing your API key will reset your selected domain if you have it
+            set already. You have to set it up again.
+          </p>
+          <Button type="submit" className="mt-4">
             Set API key
           </Button>
         </form>
