@@ -45,6 +45,7 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
+          router.push("/dkim")
         }}
       >
         (2) Add DKIM
