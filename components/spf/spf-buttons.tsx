@@ -63,7 +63,7 @@ export default function SpfButtons() {
         );
         toast.success(`[${domainName}] Successfully updated SPF record!`);
       } catch (error) {
-        const defaultErrorText = `[${domainName}] An error occured while updating SPF records.`;
+        const defaultErrorText = `[${domainName}] An error occured while updating SPF record.`;
         if (error instanceof AxiosError) {
           toast.error(
             error.response?.data.message
