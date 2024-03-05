@@ -18,22 +18,23 @@ export default function Page() {
         </div>
         <div className="grid grid-cols-1 gap-4">
           <Button className="bg-slate-900 text-slate-200 w-full uppercase font-bold tracking-widest hover:bg-slate-600">
-            (1) Add All
+            Add All
           </Button>
+          <p className="text-slate-500">or you can add them one by one!</p>
           <Button className="bg-amber-200 text-amber-900 w-full uppercase font-bold tracking-widest hover:bg-amber-400">
-            (2) Add SPF
+            (1) Add SPF
           </Button>
           <Button className="bg-lime-200 text-lime-900 w-full uppercase font-bold tracking-widest hover:bg-lime-400">
-            (3) Add DKIM
+            (2) Add DKIM
           </Button>
           <Button className="bg-purple-200 text-purple-900 w-full uppercase font-bold tracking-widest hover:bg-purple-400">
-            (4) Add DMAC
+            (3) Add DMAC
           </Button>
           <Button className="bg-pink-200 text-pink-900 w-full uppercase font-bold tracking-widest hover:bg-pink-400">
-            (5) Add tracking
+            (4) Add tracking
           </Button>
           <Button className="bg-sky-200 text-sky-900 w-full uppercase font-bold tracking-widest hover:bg-sky-400">
-            (6) Add redirect
+            (5) Add redirect
           </Button>
         </div>
       </div>
