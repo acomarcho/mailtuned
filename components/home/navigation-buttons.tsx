@@ -45,7 +45,7 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
-          router.push("/dkim")
+          router.push("/dkim");
         }}
       >
         (2) Add DKIM
@@ -56,9 +56,10 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
+          router.push("/dmarc");
         }}
       >
-        (3) Add DMAC
+        (3) Add DMARC
       </Button>
       <Button
         className="bg-pink-200 text-pink-900 w-full uppercase font-bold tracking-widest hover:bg-pink-400"
