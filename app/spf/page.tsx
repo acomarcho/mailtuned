@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import SpfButtons from "@/components/spf/spf-buttons";
 
 export default function SpfPage() {
   return (
@@ -11,11 +11,7 @@ export default function SpfPage() {
         send emails from!
       </p>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        <Button className="py-8">Google (Workspace)</Button>
-        <Button className="py-8">Microsoft (Outlook)</Button>
-        <Button className="py-8">Namecheap (Privatemail)</Button>
-        <Button className="py-8">Zoho</Button>
-        <Button className="py-8">Stackmail</Button>
+        <SpfButtons />
       </div>
     </div>
   );
