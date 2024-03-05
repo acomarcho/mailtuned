@@ -1,7 +1,6 @@
 import NavigationButtons from "@/components/home/navigation-buttons";
 import SetUpApiKey from "@/components/home/set-up-api-key";
 import SetUpDomain from "@/components/home/set-up-domain";
-import { Button } from "@/components/ui/button";
 
 export default function Page() {
   return (
