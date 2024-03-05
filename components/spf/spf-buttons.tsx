@@ -42,31 +42,40 @@ export default function SpfButtons() {
     label: string;
     data: string;
   }) => {
-    try {
-      setPageStatus(PageStatus.Loading);
-      await axios.post(
-        "/api/spf",
-        {
-          domain: domain,
-          data: preset.data,
-        },
-        {
-          headers: {
-            Authorization: `sso-key ${apiKey?.key}:${apiKey?.secret}`,
-          },
-        }
-      );
-      toast.success("Successfully updated SPF record!");
-    } catch (error) {
-      const defaultErrorText = "An error occured while updating SPF records.";
-      if (error instanceof AxiosError) {
-        toast.error(error.response?.data.message || defaultErrorText);
-      } else {
-        toast.error(defaultErrorText);
-      }
-    } finally {
-      setPageStatus(PageStatus.None);
+    if (!domain) {
+      return;
     }
+
+    setPageStatus(PageStatus.Loading);
+    for (const domainName of domain.domains) {
+      try {
+        await axios.post(
+          "/api/spf",
+          {
+            domain: domainName,
+            data: preset.data,
+          },
+          {
+            headers: {
+              Authorization: `sso-key ${apiKey?.key}:${apiKey?.secret}`,
+            },
+          }
+        );
+        toast.success(`[${domainName}] Successfully updated SPF record!`);
+      } catch (error) {
+        const defaultErrorText = `[${domainName}] An error occured while updating SPF records.`;
+        if (error instanceof AxiosError) {
+          toast.error(
+            error.response?.data.message
+              ? `[${domainName}] ${error.response.data.message}`
+              : defaultErrorText
+          );
+        } else {
+          toast.error(defaultErrorText);
+        }
+      }
+    }
+    setPageStatus(PageStatus.None);
   };
 
   return (

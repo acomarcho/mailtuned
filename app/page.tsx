@@ -1,6 +1,5 @@
 import NavigationButtons from "@/components/home/navigation-buttons";
 import SetUpApiKey from "@/components/home/set-up-api-key";
-import SetUpDomain from "@/components/home/set-up-domain";
 
 export default function Page() {
   return (
@@ -13,7 +12,6 @@ export default function Page() {
           <h2 className="text-slate-500">GoDaddy DNS Toolkit</h2>
           <div className="flex gap-4">
             <SetUpApiKey />
-            <SetUpDomain />
           </div>
         </div>
         <div className="grid grid-cols-1 gap-4">

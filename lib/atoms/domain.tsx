@@ -1,6 +1,8 @@
 import { atomWithStorage } from "jotai/utils";
 
-type DomainAtom = string;
+type DomainAtom = {
+  domains: string[];
+};
 
 export const domainAtom = atomWithStorage<DomainAtom | undefined>(
   "domain",

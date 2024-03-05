@@ -12,10 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useState } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { apiKeyAtom } from "@/lib/atoms/api-key";
 import { toast } from "sonner";
 import { domainAtom } from "@/lib/atoms/domain";
+import { PageStatus } from "@/lib/constants/page-status";
+import { GetDomainsResponse } from "@/lib/types/response";
+import axios from "axios";
 
 type ApiKeyInput = {
   key: string;
@@ -24,9 +27,10 @@ type ApiKeyInput = {
 
 export default function SetUpApiKey() {
   const [apiKey, setApiKey] = useAtom(apiKeyAtom);
-  const [domain, setDomain] = useAtom(domainAtom);
+  const setDomain = useSetAtom(domainAtom);
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [pageStatus, setPageStatus] = useState<PageStatus>(PageStatus.None);
 
   const {
     register,
@@ -34,17 +38,35 @@ export default function SetUpApiKey() {
     reset,
     formState: { errors },
   } = useForm<ApiKeyInput>();
-  const onSubmit: SubmitHandler<ApiKeyInput> = (data) => {
-    setApiKey({
-      key: data.key,
-      secret: data.secret,
-    });
-    handleOpenChange(false);
-    toast.success(
-      "Successfully set API key! Your domain information has been reset."
-    );
-    if (domain) {
+  const onSubmit: SubmitHandler<ApiKeyInput> = async (data) => {
+    try {
+      setPageStatus(PageStatus.Loading);
+
+      setApiKey({
+        key: data.key,
+        secret: data.secret,
+      });
+
+      const { data: domainsData } = await axios.get<GetDomainsResponse>(
+        "/api/domains",
+        {
+          headers: {
+            Authorization: `sso-key ${data.key}:${data.secret}`,
+          },
+        }
+      );
+
+      toast.success("Your API key has been set successfully!");
+
+      setDomain({ domains: domainsData.data.map((domain) => domain.domain) });
+    } catch (error) {
+      toast.error(
+        "Your API key cannot be authorized by GoDaddy! Make sure you have inputted the correct one!"
+      );
       setDomain(undefined);
+    } finally {
+      setPageStatus(PageStatus.None);
+      handleOpenChange(false);
     }
   };
 
@@ -103,8 +125,12 @@ export default function SetUpApiKey() {
             Changing your API key will reset your selected domain if you have it
             set already. You have to set it up again.
           </p>
-          <Button type="submit" className="mt-4">
-            Set API key
+          <Button
+            type="submit"
+            className="mt-4"
+            disabled={pageStatus === PageStatus.Loading}
+          >
+            Set API key {pageStatus === PageStatus.Loading && "..."}
           </Button>
         </form>
       </DialogContent>
