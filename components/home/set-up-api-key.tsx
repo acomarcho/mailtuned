@@ -89,7 +89,14 @@ export default function SetUpApiKey() {
         <DialogHeader className="text-left">
           <DialogTitle>Set up API key</DialogTitle>
           <DialogDescription>
-            Put your API key in the field below!
+            <p>
+              In order to add records for you. we need access to your GoDaddy
+              API key.
+            </p>
+            <p className="text-yellow-700 mt-2 text-xs">
+              Don&apos;t worry, our server doesn&apos;t save any of your key! It
+              is stored locally inside your web browser.
+            </p>
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
