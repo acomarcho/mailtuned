@@ -23,6 +23,9 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
+          return toast.info(
+            "This is not implemented yet, please come back later!"
+          );
         }}
       >
         Add All
@@ -67,7 +70,7 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
-          router.push("tracking");
+          router.push("/tracking");
         }}
       >
         (4) Add tracking
@@ -78,6 +81,7 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
+          router.push("/redirect");
         }}
       >
         (5) Add redirect

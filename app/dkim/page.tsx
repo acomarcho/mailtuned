@@ -1,8 +1,6 @@
 import DkimForm from "@/components/dkim/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
-export default function SpfPage() {
+export default function DkimPage() {
   return (
     <div className="max-w-wrapper p-8 mx-auto">
       <h1 className="font-bold uppercase text-xl tracking-widest">

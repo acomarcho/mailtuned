@@ -1,6 +1,6 @@
 import TrackingButtons from "@/components/tracking/tracking-buttons";
 
-export default function SpfPage() {
+export default function TrackingPage() {
   return (
     <div className="max-w-wrapper p-8 mx-auto">
       <h1 className="font-bold uppercase text-xl tracking-widest">
