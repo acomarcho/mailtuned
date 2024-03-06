@@ -67,6 +67,7 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
+          router.push("tracking");
         }}
       >
         (4) Add tracking
