@@ -101,12 +101,13 @@ export default function SetUpApiKey() {
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label
-            htmlFor=""
+            htmlFor="key"
             className="text-xs uppercase tracking-wider font-medium text-slate-500"
           >
             Key <span className="text-red-500">*</span>
           </label>
           <Input
+            id="key"
             placeholder="Example: 3mM44UdBeqoP6f_AyuZxePx3u2RCHVLN8e8bd"
             {...register("key", { required: true })}
             className="mt-2"
@@ -115,12 +116,13 @@ export default function SetUpApiKey() {
             <p className="text-red-500 text-xs mt-2">Key must be filled!</p>
           )}
           <label
-            htmlFor=""
+            htmlFor="secret"
             className="text-xs uppercase tracking-wider font-medium text-slate-500 mt-4 inline-block"
           >
             Secret <span className="text-red-500">*</span>
           </label>
           <Input
+            id="secret"
             placeholder="Example: Ln7Wn7wvicPzAQiuGxVa8Q"
             {...register("secret", { required: true })}
             className="mt-2"
