@@ -8,7 +8,7 @@ export default function DkimStepPage() {
       <div className="max-w-wrapper mx-auto p-8 mb-4">
         <StepsIndicator currentStep={2} />
       </div>
-      <DkimPage />
+      <DkimPage className="shadow-md" />
       <div className="max-w-wrapper mx-auto p-8">
         <StepsButton prevPage={1} nextPage={3} />
       </div>

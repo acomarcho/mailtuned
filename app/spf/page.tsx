@@ -1,8 +1,11 @@
 import SpfButtons from "@/components/spf/spf-buttons";
+import { cn } from "@/lib/utils";
 
-export default function SpfPage() {
+export default function SpfPage({
+  className,
+}: React.AllHTMLAttributes<HTMLDivElement>) {
   return (
-    <div className="max-w-wrapper p-8 mx-auto">
+    <div className={cn("max-w-wrapper p-8 mx-auto", className)}>
       <h1 className="font-bold uppercase text-xl tracking-widest">
         Add SPF records
       </h1>
