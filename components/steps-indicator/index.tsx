@@ -24,7 +24,7 @@ export default function StepsIndicator({
                 {stepIndex}
               </div>
               <p className="text-center w-[120px] absolute left-[-44px] top-10 text-sm">
-                SPF
+                {step}
               </p>
             </div>
             {stepIndex < steps.length && (
