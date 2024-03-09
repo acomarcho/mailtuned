@@ -23,9 +23,7 @@ export default function NavigationButtons() {
           if (!isDomainSelected) {
             return toast.error(noDomainErrorMessage);
           }
-          return toast.info(
-            "This is not implemented yet, please come back later!"
-          );
+          router.push("/steps/1");
         }}
       >
         Add All
