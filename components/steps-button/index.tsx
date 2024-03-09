@@ -12,17 +12,19 @@ export default function StepsButton({
     <div className="flex justify-between">
       {prevPage ? (
         <Link href={`/steps/${prevPage}`}>
-          <Button>Previous step</Button>
+          <Button>{"<  "} Previous step</Button>
         </Link>
       ) : (
         <div />
       )}
       {nextPage ? (
         <Link href={`/steps/${nextPage}`}>
-          <Button>Next step</Button>
+          <Button>Next step {"  >"}</Button>
         </Link>
       ) : (
-        <div />
+        <Link href={`/`}>
+          <Button>Finish!</Button>
+        </Link>
       )}
     </div>
   );
