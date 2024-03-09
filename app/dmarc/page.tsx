@@ -1,11 +1,9 @@
 import DmarcForm from "@/components/dmarc/form";
 import { cn } from "@/lib/utils";
 
-export default function DmarcPage({
-  className,
-}: React.AllHTMLAttributes<HTMLDivElement>) {
+export default function DmarcPage() {
   return (
-    <div className={cn("max-w-wrapper p-8 mx-auto", className)}>
+    <div className={cn("max-w-wrapper p-8 mx-auto", "shadow-md")}>
       <h1 className="font-bold uppercase text-xl tracking-widest">
         Add DMARC records
       </h1>

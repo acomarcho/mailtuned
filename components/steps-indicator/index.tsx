@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import React from "react";
 
 const steps = ["SPF", "DKIM", "DMARC", "Tracking", "Redirect"];
 
@@ -13,8 +14,8 @@ export default function StepsIndicator({
         const stepIndex = i + 1;
 
         return (
-          <>
-            <div key={step} className="grid grid-cols-1 gap-2 relative">
+          <React.Fragment key={step}>
+            <div className="grid grid-cols-1 gap-2 relative">
               <div
                 className={cn(
                   "grid place-items-center bg-slate-300 text-slate-9000 rounded-full w-8 h-8",
@@ -35,7 +36,7 @@ export default function StepsIndicator({
                 )}
               />
             )}
-          </>
+          </React.Fragment>
         );
       })}
     </div>

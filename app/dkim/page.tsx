@@ -1,11 +1,9 @@
 import DkimForm from "@/components/dkim/form";
 import { cn } from "@/lib/utils";
 
-export default function DkimPage({
-  className,
-}: React.AllHTMLAttributes<HTMLDivElement>) {
+export default function DkimPage() {
   return (
-    <div className={cn("max-w-wrapper p-8 mx-auto", className)}>
+    <div className={cn("max-w-wrapper p-8 mx-auto", "shadow-md")}>
       <h1 className="font-bold uppercase text-xl tracking-widest">
         Add DKIM records
       </h1>

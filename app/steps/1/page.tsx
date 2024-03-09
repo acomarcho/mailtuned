@@ -8,7 +8,7 @@ export default function SpfStepPage() {
       <div className="max-w-wrapper mx-auto p-8 mb-4">
         <StepsIndicator currentStep={1} />
       </div>
-      <SpfPage className="shadow-md" />
+      <SpfPage />
       <div className="max-w-wrapper mx-auto p-8">
         <StepsButton prevPage={null} nextPage={2} />
       </div>

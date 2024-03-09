@@ -1,11 +1,9 @@
 import TrackingButtons from "@/components/tracking/tracking-buttons";
 import { cn } from "@/lib/utils";
 
-export default function TrackingPage({
-  className,
-}: React.AllHTMLAttributes<HTMLDivElement>) {
+export default function TrackingPage() {
   return (
-    <div className={cn("max-w-wrapper p-8 mx-auto", className)}>
+    <div className={cn("max-w-wrapper p-8 mx-auto", "shadow-md")}>
       <h1 className="font-bold uppercase text-xl tracking-widest">
         Open Tracking
       </h1>

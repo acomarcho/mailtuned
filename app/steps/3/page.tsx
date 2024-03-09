@@ -8,7 +8,7 @@ export default function DmarcStepPage() {
       <div className="max-w-wrapper mx-auto p-8 mb-4">
         <StepsIndicator currentStep={3} />
       </div>
-      <DmarcPage className="shadow-md" />
+      <DmarcPage />
       <div className="max-w-wrapper mx-auto p-8">
         <StepsButton prevPage={2} nextPage={4} />
       </div>

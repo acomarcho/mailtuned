@@ -8,7 +8,7 @@ export default function RedirectStepPage() {
       <div className="max-w-wrapper mx-auto p-8 mb-4">
         <StepsIndicator currentStep={5} />
       </div>
-      <RedirectPage className="shadow-md" />
+      <RedirectPage />
       <div className="max-w-wrapper mx-auto p-8">
         <StepsButton prevPage={4} nextPage={null} />
       </div>

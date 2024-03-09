@@ -1,11 +1,9 @@
 import RedirectForm from "@/components/redirect/form";
 import { cn } from "@/lib/utils";
 
-export default function RedirectPage({
-  className,
-}: React.AllHTMLAttributes<HTMLDivElement>) {
+export default function RedirectPage() {
   return (
-    <div className={cn("max-w-wrapper p-8 mx-auto", className)}>
+    <div className={cn("max-w-wrapper p-8 mx-auto", "shadow-md")}>
       <h1 className="font-bold uppercase text-xl tracking-widest">
         Redirect your domain
       </h1>
