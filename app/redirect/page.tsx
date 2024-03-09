@@ -10,7 +10,7 @@ export default function RedirectPage() {
       <p className="text-slate-500 text-sm mt-2">
         Add your website that you want all the domains to be redirected to!
       </p>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+      <div className="mt-8">
         <RedirectForm />
       </div>
     </div>
