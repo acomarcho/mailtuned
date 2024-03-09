@@ -84,7 +84,7 @@ export default function SpfButtons() {
         return (
           <Button
             disabled={pageStatus === PageStatus.Loading}
-            className="py-8"
+            className="py-8 whitespace-normal"
             key={preset.label}
             onClick={() => handleUpdateSpfRecord(preset)}
           >
