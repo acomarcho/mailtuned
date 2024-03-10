@@ -74,7 +74,7 @@ export default function MxButtons() {
     for (const domainName of domain.domains) {
       try {
         await axios.post(
-          "/api/spf",
+          "/api/mx",
           {
             domain: domainName,
             data: preset.data,
