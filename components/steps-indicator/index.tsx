@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-const steps = ["SPF", "DKIM", "DMARC", "Tracking", "Redirect"];
+const steps = ["SPF", "MX", "DKIM", "DMARC", "Tracking", "Redirect"];
 
 export default function StepsIndicator({
   currentStep,
@@ -9,7 +9,7 @@ export default function StepsIndicator({
   currentStep: number;
 }) {
   return (
-    <div className="grid grid-cols-[32px_1fr_32px_1fr_32px_1fr_32px_1fr_32px] items-center">
+    <div className="grid grid-cols-[32px_1fr_32px_1fr_32px_1fr_32px_1fr_32px_1fr_32px] items-center">
       {steps.map((step, i) => {
         const stepIndex = i + 1;
 
@@ -24,7 +24,7 @@ export default function StepsIndicator({
               >
                 {stepIndex}
               </div>
-              <p className="text-center w-[120px] absolute left-[-44px] top-10 text-sm">
+              <p className="text-center w-[120px] absolute left-[-44px] top-10 text-xs md:text-sm">
                 {step}
               </p>
             </div>
