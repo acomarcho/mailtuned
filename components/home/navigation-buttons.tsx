@@ -41,6 +41,17 @@ export default function NavigationButtons() {
         (1) Add SPF
       </Button>
       <Button
+        className="bg-rose-200 text-rose-900 w-full uppercase font-bold tracking-widest hover:bg-rose-400"
+        onClick={() => {
+          if (!isDomainSelected) {
+            return toast.error(noDomainErrorMessage);
+          }
+          router.push("/mx");
+        }}
+      >
+        (2) Add MX records
+      </Button>
+      <Button
         className="bg-lime-200 text-lime-900 w-full uppercase font-bold tracking-widest hover:bg-lime-400"
         onClick={() => {
           if (!isDomainSelected) {
@@ -49,7 +60,7 @@ export default function NavigationButtons() {
           router.push("/dkim");
         }}
       >
-        (2) Add DKIM
+        (3) Add DKIM
       </Button>
       <Button
         className="bg-purple-200 text-purple-900 w-full uppercase font-bold tracking-widest hover:bg-purple-400"
@@ -60,7 +71,7 @@ export default function NavigationButtons() {
           router.push("/dmarc");
         }}
       >
-        (3) Add DMARC
+        (4) Add DMARC
       </Button>
       <Button
         className="bg-pink-200 text-pink-900 w-full uppercase font-bold tracking-widest hover:bg-pink-400"
@@ -71,7 +82,7 @@ export default function NavigationButtons() {
           router.push("/tracking");
         }}
       >
-        (4) Add tracking
+        (5) Add tracking
       </Button>
       <Button
         className="bg-sky-200 text-sky-900 w-full uppercase font-bold tracking-widest hover:bg-sky-400"
@@ -82,7 +93,7 @@ export default function NavigationButtons() {
           router.push("/redirect");
         }}
       >
-        (5) Add redirect
+        (6) Add redirect
       </Button>
     </>
   );
