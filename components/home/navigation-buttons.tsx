@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const noDomainErrorMessage =
-  "Please finish your API key set up before continuing!";
+  "Please finish your API key set up before continuing! Make sure you have selected at least one domain too!";
 
 const steps = [
   {
@@ -50,7 +50,10 @@ const steps = [
 
 export default function NavigationButtons() {
   const domain = useAtomValue(domainAtom);
-  const isDomainSelected = domain !== undefined;
+  const isDomainSelected =
+    domain !== undefined &&
+    domain.selectedDomains &&
+    domain.selectedDomains.length > 0;
 
   const router = useRouter();
 
