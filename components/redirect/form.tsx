@@ -35,7 +35,7 @@ export default function RedirectForm() {
     }
 
     setPageStatus(PageStatus.Loading);
-    for (const domainName of domain.domains) {
+    for (const domainName of domain.selectedDomains) {
       try {
         await axios.post(
           "/api/redirect",

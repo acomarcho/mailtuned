@@ -49,7 +49,7 @@ export default function DmarcForm() {
     }
 
     setPageStatus(PageStatus.Loading);
-    for (const domainName of domain.domains) {
+    for (const domainName of domain.selectedDomains) {
       try {
         let data: string;
         const setup = form.watch("setup");
