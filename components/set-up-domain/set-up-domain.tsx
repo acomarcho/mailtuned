@@ -58,46 +58,48 @@ export default function SetUpDomain() {
         <Button>Select domains</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-h-[320px] overflow-y-scroll">
-        <DropdownMenuItemAlternative>
-          <div className="grid grid-cols-1 gap-2 w-full">
-            <label htmlFor="domain-search">Search</label>
-            <Input
-              className="w-full"
-              id="domain-search"
-              placeholder="e.g. mailtuned.com"
-              value={domainSearch}
-              onChange={(e) => {
-                setDomainSearch(e.currentTarget.value);
-              }}
-            />
-          </div>
-        </DropdownMenuItemAlternative>
-        <DropdownMenuItemAlternative>
-          <div className="grid grid-cols-2 gap-2">
-            <Button
-              onClick={() => {
-                setDomain({
-                  ...domain,
-                  selectedDomains: [...filteredDomains],
-                });
-              }}
-            >
-              Select all
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setDomain({
-                  ...domain,
-                  selectedDomains: [],
-                });
-              }}
-            >
-              Remove all
-            </Button>
-          </div>
-        </DropdownMenuItemAlternative>
-        <DropdownMenuSeparator />
+        <div className="sticky top-0 z-10 bg-white">
+          <DropdownMenuItemAlternative>
+            <div className="grid grid-cols-1 gap-2 w-full">
+              <label htmlFor="domain-search">Search</label>
+              <Input
+                className="w-full"
+                id="domain-search"
+                placeholder="e.g. mailtuned.com"
+                value={domainSearch}
+                onChange={(e) => {
+                  setDomainSearch(e.currentTarget.value);
+                }}
+              />
+            </div>
+          </DropdownMenuItemAlternative>
+          <DropdownMenuItemAlternative>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                onClick={() => {
+                  setDomain({
+                    ...domain,
+                    selectedDomains: [...filteredDomains],
+                  });
+                }}
+              >
+                Select all
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setDomain({
+                    ...domain,
+                    selectedDomains: [],
+                  });
+                }}
+              >
+                Remove all
+              </Button>
+            </div>
+          </DropdownMenuItemAlternative>
+          <DropdownMenuSeparator />
+        </div>
         {filteredDomains?.map((d) => {
           return (
             <DropdownMenuItemAlternative key={d}>
