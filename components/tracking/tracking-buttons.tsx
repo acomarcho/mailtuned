@@ -70,12 +70,15 @@ export default function TrackingButtons() {
     setPageStatus(PageStatus.None);
   };
 
+  const isDomainDataReady =
+    domain?.selectedDomains && domain.selectedDomains.length > 0;
+
   return (
     <>
       {trackingPresets.map((preset) => {
         return (
           <Button
-            disabled={pageStatus === PageStatus.Loading}
+            disabled={pageStatus === PageStatus.Loading || !isDomainDataReady}
             className="py-8"
             key={preset.label}
             onClick={() => handleUpdateTrackingRecord(preset)}
