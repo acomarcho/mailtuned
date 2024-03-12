@@ -103,6 +103,9 @@ export default function DmarcForm() {
     setPageStatus(PageStatus.None);
   };
 
+  const isDomainDataReady =
+    domain?.selectedDomains && domain.selectedDomains.length > 0;
+
   return (
     <>
       <div className="mt-8">
@@ -240,7 +243,8 @@ export default function DmarcForm() {
         disabled={
           (form.watch("reporting") !== Reporting.ReportingNo &&
             form.watch("email") === "") ||
-          pageStatus === PageStatus.Loading
+          pageStatus === PageStatus.Loading ||
+          !isDomainDataReady
         }
       >
         Submit DMARC record! {pageStatus === PageStatus.Loading && "..."}
