@@ -78,12 +78,15 @@ export default function SpfButtons() {
     setPageStatus(PageStatus.None);
   };
 
+  const isDomainDataReady =
+    domain?.selectedDomains && domain.selectedDomains.length > 0;
+
   return (
     <>
       {spfPresets.map((preset) => {
         return (
           <Button
-            disabled={pageStatus === PageStatus.Loading}
+            disabled={pageStatus === PageStatus.Loading || !isDomainDataReady}
             className="py-8 whitespace-normal"
             key={preset.label}
             onClick={() => handleUpdateSpfRecord(preset)}

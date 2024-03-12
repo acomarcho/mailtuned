@@ -18,22 +18,7 @@ export default function SetUpDomain() {
   const [domain, setDomain] = useAtom(domainAtom);
 
   const [domainSearch, setDomainSearch] = useState("");
-
-  const dummyDomains = [
-    "google.com",
-    "yahoo.com",
-    "bing.com",
-    "facebook.com",
-    "instagram.com",
-    "youtube.com",
-    "apple.com",
-    "spotify.com",
-    "twitter.com",
-    "x.com",
-    "fbi.gov",
-    "cia.gov",
-  ];
-
+  
   useEffect(() => {
     // Fallback: If users don't have domain.selectedDomains, set it as domain.domains
     if (domain !== undefined && domain.domains && !domain.selectedDomains) {

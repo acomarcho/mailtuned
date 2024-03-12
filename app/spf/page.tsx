@@ -1,3 +1,4 @@
+import SetUpDomain from "@/components/set-up-domain/set-up-domain";
 import SpfButtons from "@/components/spf/spf-buttons";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +14,10 @@ export default function SpfPage() {
       </p>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
         <SpfButtons />
+      </div>
+      <div className="bg-amber-50 p-4 mt-8 space-y-2">
+        <p className="text-amber-600">Want to select your domains first?</p>
+        <SetUpDomain />
       </div>
     </div>
   );
