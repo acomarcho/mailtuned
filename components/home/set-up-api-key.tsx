@@ -83,7 +83,7 @@ export default function SetUpApiKey() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button className="mt-8 w-fit">Set up API key</Button>
+        <Button className="w-fit">Set up API key</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader className="text-left">
