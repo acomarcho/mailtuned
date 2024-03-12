@@ -3,7 +3,6 @@
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -12,23 +11,10 @@ import { Input } from "../ui/input";
 import { domainAtom } from "@/lib/atoms/domain";
 import { useAtomValue } from "jotai";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 export default function SetUpDomain() {
   const domains = useAtomValue(domainAtom);
-
-  const [isSearching, setIsSearching] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (dropdownRef.current) {
-      console.log(dropdownRef.current);
-      dropdownRef.current.addEventListener("keydown", (e) =>
-        e.stopPropagation()
-      );
-    }
-  }, [dropdownRef]);
 
   const dummyDomains = [
     "google.com",
@@ -50,22 +36,11 @@ export default function SetUpDomain() {
       <DropdownMenuTrigger asChild>
         <Button disabled={domains === undefined}>Select domains</Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent
-        className="max-h-[320px] overflow-y-scroll"
-        ref={dropdownRef}
-      >
+      <DropdownMenuContent className="max-h-[320px] overflow-y-scroll">
         <DropdownMenuItemAlternative>
           <div className="grid grid-cols-1 gap-2">
             <label htmlFor="domain-search">Search</label>
-            <Input
-              id="domain-search"
-              placeholder="e.g. mailtuned.com"
-              onChange={(e) => {
-                e.preventDefault();
-              }}
-              onFocus={() => setIsSearching(true)}
-              onBlur={() => setIsSearching(false)}
-            />
+            <Input id="domain-search" placeholder="e.g. mailtuned.com" />
           </div>
         </DropdownMenuItemAlternative>
         <DropdownMenuItemAlternative className="space-x-4">
