@@ -66,6 +66,9 @@ export default function RedirectForm() {
     setPageStatus(PageStatus.None);
   };
 
+  const isDomainDataReady =
+    domain?.selectedDomains && domain.selectedDomains.length > 0;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label
@@ -89,7 +92,7 @@ export default function RedirectForm() {
       <Button
         type="submit"
         className="mt-4"
-        disabled={pageStatus === PageStatus.Loading}
+        disabled={pageStatus === PageStatus.Loading || !isDomainDataReady}
       >
         Set up redirect {pageStatus === PageStatus.Loading && "..."}
       </Button>
