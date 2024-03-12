@@ -1,4 +1,5 @@
 import MxButtons from "@/components/mx/mx-buttons";
+import SetUpDomain from "@/components/set-up-domain/set-up-domain";
 import { cn } from "@/lib/utils";
 
 export default function MxPage() {
@@ -14,6 +15,10 @@ export default function MxPage() {
       </p>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
         <MxButtons />
+      </div>
+      <div className="bg-amber-50 p-4 mt-8 space-y-2">
+        <p className="text-amber-600">Want to select your domains first?</p>
+        <SetUpDomain />
       </div>
     </div>
   );
