@@ -58,7 +58,11 @@ export default function SetUpApiKey() {
 
       toast.success("Your API key has been set successfully!");
 
-      setDomain({ domains: domainsData.data.map((domain) => domain.domain) });
+      const mappedDomains = domainsData.data.map((domain) => domain.domain);
+      setDomain({
+        domains: [...mappedDomains],
+        selectedDomains: [...mappedDomains],
+      });
     } catch (error) {
       toast.error(
         "Your API key cannot be authorized by GoDaddy! Make sure you have inputted the correct one!"
