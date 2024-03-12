@@ -71,6 +71,9 @@ export default function DkimForm() {
     setPageStatus(PageStatus.None);
   };
 
+  const isDomainDataReady =
+    domain?.selectedDomains && domain.selectedDomains.length > 0;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-2 gap-4">
@@ -119,7 +122,7 @@ export default function DkimForm() {
       <Button
         type="submit"
         className="mt-8"
-        disabled={pageStatus === PageStatus.Loading}
+        disabled={pageStatus === PageStatus.Loading || !isDomainDataReady}
       >
         Submit DKIM record! {pageStatus === PageStatus.Loading && "..."}
       </Button>
