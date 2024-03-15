@@ -11,7 +11,7 @@ export async function GET() {
     );
   }
 
-  const response = await fetch("https://api.godaddy.com/v1/domains", {
+  const response = await fetch("https://api.godaddy.com/v1/domains?limit=1000", {
     headers: {
       Authorization: authorization,
     },
