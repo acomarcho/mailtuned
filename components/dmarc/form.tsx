@@ -68,7 +68,7 @@ export default function DmarcForm() {
           reporting === Reporting.ReportingNo
         ) {
           data =
-            "v=DMARC1; p=reject; sp=reject; pct=0; ri=86400; aspf=r; adkim=r;";
+            "v=DMARC1; p=reject; pct=100; sp=reject; ri=86400; aspf=r; adkim=r;";
         } else {
           data =
             "v=DMARC1; p=reject; sp=reject; pct=100; ri=86400; aspf=s; adkim=s;";
